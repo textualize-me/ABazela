@@ -1,0 +1,101 @@
+body {
+    font-family: "Fira Code Medium";
+    /*margin: 20px;*/
+    background-image: url("2.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #003049;
+}
+
+h1 {
+    color: #c1121f;
+    text-align: center;
+    font-size: 5em;
+    margin-bottom: 0;
+}
+
+h2{
+    text-align: center;
+    font-size: 3em;
+    color: #003049;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+}
+
+input[type="text"],
+input[type="datetime-local"] {
+    padding: 10px;
+    margin: 5px 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /*font-size: 1.5em;*/
+}
+
+button {
+    padding: 10px;
+    margin-left: 5px;
+    background-color: #669bbc;
+    color: #fdf0d5;
+    border: #003049;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #003049;
+}
+
+.highlight {
+    background-color: #669bbc;
+    color: #fdf0d5;
+}
+
+.task-name {
+    display: inline-block;
+    width: 200px;
+    font-size: 1.5em;
+
+}
+
+
+
+.highlighted-task {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.task-name {
+    display: inline-block;
+    width: 200px;
+}
+
+.task-item {
+    display: flex;
+    /*margin-left: 30em;*/
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background: none;
+
+}
+
+.task-name.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+
+
+
