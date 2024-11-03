@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maps with Leaflet</title>
+    <link rel="stylesheet" href="leaflet-1.7.1/leaflet.css" />
+    <script src="leaflet-1.7.1/leaflet-src.js"></script>
+    <script src="leaflet-1.7.1/leaflet-providers.js"></script>
+    <script src="leaflet-1.7.1/leaflet-image.js"></script>
+
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            /*gap: 20px;*/
+        }
+        button{
+            display: inline-block;
+        }
+        #map {
+            width: 600px;
+            height: 300px;
+            border: 1px solid #3388ff;
+        }
+
+        #puzzleArea {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            width:600px;
+            height: 300px;
+            gap: 0;
+            margin-bottom: 5px;
+        }
+        /*#rasterMap {*/
+        /*    width: 600px;*/
+        /*    height: 300px;*/
+        /*    border: 1px solid black;*/
+        /*}*/
+
+        .puzzle-piece{
+            border: 1px solid #3388ff;
+            cursor: grab;
+            box-sizing: border-box;
+
+        }
+
+        .section{
+            border: 2px solid green;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        button{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<button id="getLocation">Get Current Location</button>
+<button id="saveButton">Save Raster Map</button>
+<br>
+<div id="puzzleArea"></div>
+<div id="puzzleContainer"></div>
+<!--<canvas id="rasterMap"></canvas>-->
+
+<script>
+    let map = L.map('map').setView([53.430127, 14.564802], 18);
+    L.tileLayer.provider('Esri.WorldImagery').addTo(map);
+    let marker = L.marker([53.430127, 14.564802]).addTo(map);
+    marker.bindPopup("<strong>Hello!</strong><br>This is a popup.");
+
+    document.getElementById("saveButton").addEventListener("click", function() {
+        leafletImage(map, function (err, canvas) {
+
+            // let rasterMap = document.getElementById("rasterMap");
+            // let rasterContext = rasterMap.getContext("2d");
+            // rasterContext.drawImage(canvas, 0, 0, 300, 150);
+
+            const puzzleContainer = document.getElementById("puzzleContainer");
+            puzzleContainer.innerHTML = "";
+
+            const grid = 4;
+            let puzzleWidth = 600/grid;
+            let puzzleHeight = 300/grid;
+            const pieces = [];
+
+            for (let row=0; row <grid; row++){
+                for (let col=0; col<grid; col++){
+                    const puzzle = document.createElement("canvas");
+                    puzzle.width = puzzleWidth;
+                    puzzle.height = puzzleHeight;
+                    puzzle.id = `puzzle-${row}-${col}`;
+                    puzzle.draggable = true;
+                    puzzle.classList.add("puzzle-piece");
+                    const puzzleContext = puzzle.getContext("2d");
+
+                    puzzleContext.drawImage(canvas, puzzleWidth * col, puzzleHeight * row, puzzleWidth, puzzleHeight, 0, 0, puzzleWidth, puzzleHeight);
+
+                    pieces.push(puzzle);
+                }
+            }
+
+            for (let i=pieces.length -1; i > 0; i--){
+                const j = Math.floor(Math.random()* (i+1));
+                [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+            }
+
+            pieces.forEach(piece => puzzleContainer.appendChild(piece));
+            initiatlizePuzzleArea();
+            startDragAndDrop(pieces);
+
+
+
+        });
+    });
+
+
+    function initiatlizePuzzleArea(){
+        const puzzleArea = document.getElementById("puzzleArea")
+        puzzleArea.style.backgroundColor="lightblue"
+        puzzleArea.innerHTML = "";
+
+        for (let row=0; row<4; row++){
+            for (let col=0; col<4; col++){
+                const section = document.createElement("div")
+                section.classList.add("section")
+                section.id = `section-${row}-${col}`
+                // section.style.width = `${600/4}px`
+                // section.style.height = `${300/4}px`
+                section.addEventListener("dragover", dragOver)
+                section.addEventListener("drop", dragDrop)
+                puzzleArea.appendChild(section)
+            }
+        }
+    }
+
+    function startDragAndDrop(pieces){
+        pieces.forEach(piece => {
+            piece.addEventListener("dragstart", dragStart)
+        })
+    }
+    function dragStart(event){
+        event.dataTransfer.setData('text/plain', event.target.id);
+
+    }
+
+    function dragDrop(event){
+        event.preventDefault();
+        const data = event.dataTransfer.getData('text/plain');
+        const element = document.getElementById(data);
+
+        if (!event.target.firstChild){
+            event.target.appendChild(element)
+            element.style.position = "relative";
+            element.style.width='100%';
+            element.style.height='100%';
+        }
+
+        if (allPuzzle()){
+            console.log("Puzzle completed")
+            alert("Puzzle completed!")
+        }
+
+        event.target.appendChild(element);
+    }
+
+    function dragOver(event){
+        event.preventDefault();
+    }
+
+    function allPuzzle(){
+        const sections = document.querySelectorAll("#puzzleArea .section")
+        const allCorrect = Array.from(sections).every(section=> {
+            const child = section.firstChild;
+
+            if(child){
+                const isCorrect = section.id == child.id.replace("puzzle", "section")
+                return isCorrect;
+            }
+            return false;
+        })
+        return allCorrect;
+    }
+
+
+
+
+
+    document.getElementById("getLocation").addEventListener("click", function(event) {
+        if (! navigator.geolocation) {
+            console.log("No geolocation.");
+        }
+
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log(position);
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+
+            map.setView([lat, lon]);
+        }, positionError => {
+            console.error(positionError);
+        });
+    });
+</script>
+</body>
+</html>
