@@ -1,0 +1,188 @@
+a{
+    text-decoration: none;
+    color: #EDE7D9;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+header{
+    width:100%;
+    background-color: #fb6f92;
+    position: fixed;
+    top: 0;
+}
+
+footer, header{
+    background-color: black;
+    width: 100%;
+    height: auto;
+}
+
+header ul{
+    margin:0;
+}
+
+header ul li{
+    display: inline-block;
+    margin: 1em;
+}
+
+header form{
+    border:1px solid black;
+    border-radius: 50px;
+    padding: 0.5em;
+}
+
+#search{
+    background-color: #EDE7D9;
+    width:100%;
+}
+
+footer{
+    background-color: #941B0C;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    margin-top: auto;
+    padding: 1em 0;
+}
+footer ul li{
+    display: inline;
+    margin: 1em;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    background-image: url("../images/paws.webp");
+    margin:0;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+}
+
+h1{
+    color: #000000;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 8px;
+    font-size: 60px;
+    font-family: monospace;
+    margin-top: 55px;
+    padding: 25px;
+    background-color: #EDE7D9;
+}
+
+h2{
+    color: #5c80bc;
+    text-align: center;
+}
+
+h3{
+    color: #941B0C;
+}
+
+button{
+    background-color: black;
+    padding: 7px;
+    color: #EDE7D9;
+}
+
+section{
+    background-color: #EDE7D9;
+    padding: 10px;
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 20px;
+    text-align: justify;
+}
+
+.introduction{
+    background-color: #EDE7D9;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    border: #941B0C 3px dashed;
+}
+
+.introduction b{
+    color: #941B0C;
+}
+
+.introduction p {
+    grid-column: 1 ;
+    justify-content: center;
+    text-align: justify;
+    font-size: 1.7em;
+}
+
+.introduction img {
+    grid-column: 2;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: #9097C0 solid;
+}
+
+section a{
+    color: #E57A44;
+
+}
+
+#text{
+    width: 100%;
+    margin: 0;
+    background-color: #9097C0;
+}
+
+textarea{
+    width: 50%;
+    height: 30%;
+    padding: 5px;
+    background-color: #faecd7;
+    color: #9097C0;
+}
+
+
+@media (max-width: 768px) {
+
+    h1{
+        font-size: 3em;
+        margin-top: 1em;
+    }
+    .introduction {
+        grid-template-columns: 1fr;
+        font-size: 0.8em;
+        width:80%;
+
+    }
+    .introduction img{
+        grid-column: 1;
+    }
+    header ul li {
+        margin: 0;
+        text-align: center;
+        padding: 0.2em;
+    }
+    header ul{
+        padding: 0;
+    }
+    #search{
+        width: 70%;
+    }
+
+    section {
+        width: 90%;
+    }
+
+
+}

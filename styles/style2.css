@@ -1,0 +1,217 @@
+a{
+    text-decoration: none;
+    color: #ffe5ec;
+    font-style: italic;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+header{
+    width:100%;
+    background-color: #fb6f92;
+    position: fixed;
+    top: 0;
+}
+
+footer {
+    background-color: #000000;
+    width: 100%;
+    padding: 1em 0;
+    text-align: center;
+    clear: both;
+    position: relative;
+}
+
+header ul{
+    margin:0;
+    float:left;
+}
+
+header ul li{
+    float:left;
+    display: inline-block;
+    margin: 1em;
+}
+
+#search{
+    float:left;
+    background-color: #ffc2d1;
+    border-color: #ffe5ec;
+    font-style: italic;
+    /*color: black;*/
+
+}
+
+footer{
+    background-color: #000000;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    margin-top: auto;
+    padding: 1em 0;
+    text-align: center;
+}
+footer ul li{
+    display: inline;
+    margin: 1em;
+}
+
+body{
+    font-family: "PT Serif", serif;
+    background-image: url("../images/pinkPaws.webp");
+    margin:0;
+    height: 100%;
+    background-position: center;
+}
+
+h1{
+    color: #ff006e;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #ffe5ec;
+    border: black 3px solid;
+    font-family: "Dancing Script", serif;
+}
+
+h2{
+    color: #000000;
+    font-family: "Dancing Script", serif;
+    text-align: center;
+    font-size: 30px;
+}
+
+h3{
+    color: #ff006e;
+}
+
+
+button{
+    background-color: black;
+    padding: 7px;
+    color: #EDE7D9;
+}
+
+section{
+    float: left;
+    color: #ffe5ec;
+    background-color: #ff8fab;
+    padding: 10px;
+    width: 30%;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    text-align: justify;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.introduction{
+    color: #ffffff;
+    background-color: #ffb3c6;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 50%;
+    margin-left: 5%;
+    margin-top: 8%;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    border: #ff006e 3px solid;
+}
+
+.introduction b{
+    color: #fb6f92;
+}
+
+.introduction p {
+    grid-column: 1;
+    font-size: 1.5em;
+    text-align: justify;
+}
+
+.introduction img {
+    grid-column: 2;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: #EDE7D9 solid;
+}
+
+section a{
+    color: #ff006e;
+
+}
+
+#text{
+    width: 100%;
+    margin: 0;
+    background-color: #9097C0;
+}
+
+#clothes{
+    text-align: center;
+}
+
+#clothes ul {
+    list-style: none;
+    padding: 0;
+}
+
+#clothes li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 10px;
+}
+
+#clothes li::before {
+    content: '❤️';
+    font-size: 1.5em;
+    color: red;
+}
+
+
+@media (max-width: 768px) {
+
+    h1{
+        font-size: 3em;
+        margin-top: 8%;
+    }
+    .introduction {
+        grid-template-columns: 1fr;
+        font-size: 0.8em;
+        width:80%;
+        margin-left: 5%;
+        margin-top: 2%;
+    }
+
+    .introduction img{
+        grid-column: 1;
+    }
+    header ul li {
+        margin: 0.5em 0.5em;
+        text-align: center;
+    }
+    header ul{
+        padding: 0;
+    }
+    #search{
+        width: 60%;
+    }
+
+    section {
+        width: 90%;
+        margin-left: 3%;
+    }
+
+}
+
+
+
